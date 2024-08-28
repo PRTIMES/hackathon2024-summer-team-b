@@ -1,18 +1,14 @@
-import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
+import SearchForm from "~/components/search/search-form";
 
 export default function Header() {
-  const handleSearch = async () => {};
-
   return (
-    <header className="flex justify-between items-center shadow bg-accent/60 backdrop-blur py-2 px-4 text-primary-foreground text-sm fixed top-0 z-50 w-full">
+    <header className="flex justify-between items-center shadow bg-accent/50 backdrop-blur py-2 px-4 text-primary-foreground text-sm fixed top-0 z-50 w-full">
       <div className="text-center font-bold">
-        <h1 className="text-sm">PR Carriers 🍓</h1>
+        <h1 className="text-sm sm:text-sm">PR Carriers 🍓</h1>
       </div>
-      <form className="flex gap-2">
-        <Input className="text-base text-black" />
-        <Button>検索</Button>
-      </form>
+      <div className="hidden sm:block">
+        <SearchForm />
+      </div>
     </header>
   );
 }
