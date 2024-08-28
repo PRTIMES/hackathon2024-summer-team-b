@@ -8,7 +8,7 @@ export async function GET(request: Request) {
     })
 
   const data = await res.json();
-  const categoryData = await Promise.all(
+  const articleData = await Promise.all(
     data.map(async (e: any) => {
       // 各データに基づいて新しいリクエストを送信
       const categoryRes = await fetch(`https://hackathon.stg-prtimes.net/api/companies/${e.company_id}/releases/${e.release_id}/keywords`, {
@@ -25,5 +25,5 @@ export async function GET(request: Request) {
     })
   );
 
-  return Response.json({categoryData})
+  return Response.json({articleData})
 }
