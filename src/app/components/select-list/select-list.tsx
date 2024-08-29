@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import React from "react";
 
 import {
   Select,
@@ -13,11 +14,12 @@ import {
 } from "~/components/ui/select";
 
 export function SelectDemo() {
-  const [selectedFruit, setSelectedFruit] = useState<string>("");
+  const router = useRouter();
 
   const handleValueChange = (value: string) => {
-    setSelectedFruit(value);
-    console.log("Selected fruit:", value);
+    // クエリパラメータを更新
+    router.push(`?category=${value}`);
+    console.log("Selected category:", value);
   };
 
   return (
