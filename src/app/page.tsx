@@ -1,4 +1,7 @@
+import Link from "next/link";
+
 import SearchDrawer from "~/components/search/search-drawer";
+import { ScrollToTopButton } from "~/components/ui/scrollToTopButton";
 
 import Header from "./components/header";
 import { PaginationDemo } from "./components/pagination";
@@ -7,7 +10,7 @@ import { SelectDemo } from "./components/select-list/select-list";
 
 export default function Home() {
   return (
-    <article>
+    <article id="top">
       <Header />
       <SelectDemo />
       <ReleaseList />
