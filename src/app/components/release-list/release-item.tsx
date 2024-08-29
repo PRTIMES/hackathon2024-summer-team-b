@@ -1,3 +1,4 @@
+import lineClamp from "@tailwindcss/line-clamp";
 import Image from "next/image";
 
 import { Badge } from "~/components/ui/badge";
@@ -31,7 +32,7 @@ export default function ReleaseItem({
     <Card className="overflow-hidden relative">
       <a href={url} target="_blank" rel="noopener noreferrer">
         <CardContent className="p-0">
-          <div className="relative flex sm:block items-center">
+          <div className="relative flex sm:block items-center px-4 pt-6">
             <Image
               src={image_url}
               alt="release"
@@ -46,7 +47,7 @@ export default function ReleaseItem({
               {company_name}
             </h2>
             <div className="sm:hidden py-1.5 px-1 space-y-1 flex-1">
-              <h3 className="text-lg font-bold">{title}</h3>
+              <h3 className="text-lg font-bold line-clamp-3">{title}</h3>
               <div className="flex gap-1 flex-wrap">
                 <Badge className="bg-[#C24F4F]">キーワード</Badge>
                 <Badge className="bg-[#C24F4F]">キーワード</Badge>
