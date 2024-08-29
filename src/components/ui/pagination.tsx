@@ -1,12 +1,18 @@
 import React from "react";
+
 import { cn } from "~/libs/classes";
 
 const Pagination = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <nav ref={ref} aria-label="Pagination" className={cn("flex justify-center", className)} {...props}>
-    <ul className="flex list-none p-10 m-0">{props.children}</ul>
+  <nav
+    ref={ref}
+    aria-label="Pagination"
+    className={cn("flex justify-center", className)}
+    {...props}
+  >
+    <ul className="flex list-none py-3 m-0">{props.children}</ul>
   </nav>
 ));
 Pagination.displayName = "Pagination";
@@ -15,7 +21,7 @@ const PaginationContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
-  <div ref={ref} className={cn(className="flex")} {...props} />
+  <div ref={ref} className={cn((className = "flex"))} {...props} />
 ));
 PaginationContent.displayName = "PaginationContent";
 
@@ -27,29 +33,31 @@ const PaginationItem = React.forwardRef<
 ));
 PaginationItem.displayName = "PaginationItem";
 
-interface PaginationLinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
-    isActive?: boolean;
-  }
+interface PaginationLinkProps
+  extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+  isActive?: boolean;
+}
 
-  const PaginationLink = React.forwardRef<HTMLAnchorElement, PaginationLinkProps>(
-    ({ href, className, isActive, children, ...props }, ref) => (
-      <a
-        ref={ref}
-        href={href}
-        className={cn(
-          "px-3 py-2 rounded-md text-white",
-          isActive ? "bg-blue-500" : "bg-[#C24F4F] hover:bg-destructive/80",
-          className
-        )}
-        {...props}
-      >
-        {children}
-      </a>
-    )
-  );
+const PaginationLink = React.forwardRef<HTMLAnchorElement, PaginationLinkProps>(
+  ({ href, className, isActive, children, ...props }, ref) => (
+    <a
+      ref={ref}
+      href={href}
+      className={cn(
+        "px-3 py-2 rounded-md text-white",
+        isActive
+          ? "bg-accent"
+          : "bg-muted text-muted-foreground hover:bg-muted/80",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </a>
+  ),
+);
 
-  PaginationLink.displayName = "PaginationLink";
-
+PaginationLink.displayName = "PaginationLink";
 
 const PaginationPrevious = React.forwardRef<
   HTMLAnchorElement,
@@ -58,7 +66,10 @@ const PaginationPrevious = React.forwardRef<
   <a
     ref={ref}
     href={href}
-    className={cn("px-3 py-2 rounded-md text-white bg-[#C24F4F] hover:bg-destructive/80", className)}
+    className={cn(
+      "px-3 py-2 rounded-md text-muted-foreground bg-muted hover:bg-muted/80",
+      className,
+    )}
     {...props}
   >
     &lt;
@@ -73,7 +84,10 @@ const PaginationNext = React.forwardRef<
   <a
     ref={ref}
     href={href}
-    className={cn("px-3 py-2 rounded-md text-white bg-[#C24F4F] hover:bg-destructive/80", className)}
+    className={cn(
+      "px-3 py-2 rounded-md text-muted-foreground bg-muted hover:bg-muted/80",
+      className,
+    )}
     {...props}
   >
     &gt;
@@ -94,9 +108,9 @@ PaginationEllipsis.displayName = "PaginationEllipsis";
 export {
   Pagination,
   PaginationContent,
+  PaginationEllipsis,
   PaginationItem,
   PaginationLink,
-  PaginationPrevious,
   PaginationNext,
-  PaginationEllipsis,
+  PaginationPrevious,
 };

@@ -1,7 +1,4 @@
-"use client";
-
-import React, { useState } from "react";
-
+import { getReleasesCount } from "~/app/data/releases";
 import {
   Pagination,
   PaginationContent,
@@ -12,54 +9,70 @@ import {
   PaginationPrevious,
 } from "~/components/ui/pagination";
 
-export function PaginationDemo() {
-  const [currentPage, setCurrntPage] = useState(1)
-  const handlePageClick = (page: number) => {
-    setCurrntPage(page);
-  };
+export async function ReleaseListPagination({
+  page,
+  search,
+}: {
+  page: number;
+  search?: string;
+}) {
+  const releaseCount = await getReleasesCount({ search });
+  const pageCount = Math.ceil(Number(releaseCount.data) / 12);
+
+  if (pageCount <= 1) {
+    return null;
+  }
 
   return (
     <Pagination>
       <PaginationContent>
-        <PaginationItem>
-          <PaginationPrevious
-            href="#"
-            onClick={() => handlePageClick(currentPage > 1 ? currentPage - 1 : 1)}
-            />
-        </PaginationItem>
+        {page > 5 && (
+          <>
             <PaginationItem>
-          <PaginationLink
-                href="#"
-                isActive = {currentPage === 1}
-                onClick={() => handlePageClick(1)}
-            > 1
+              <PaginationPrevious href={`/${page - 5}`} />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationEllipsis />
+            </PaginationItem>
+          </>
+        )}
+        {page > 2 && (
+          <PaginationItem>
+            <PaginationLink href={`/${page - 2}`}>{page - 2}</PaginationLink>
+          </PaginationItem>
+        )}
+        {page > 1 && (
+          <PaginationItem>
+            <PaginationLink href={`/${page > 1 ? page - 1 : 1}`}>
+              {page - 1}
+            </PaginationLink>
+          </PaginationItem>
+        )}
+        <PaginationItem>
+          <PaginationLink href={`/${page}`} isActive>
+            {page}
           </PaginationLink>
         </PaginationItem>
-        <PaginationItem>
-          <PaginationLink
-                href="#"
-                isActive = {currentPage === 2}
-                onClick={() => handlePageClick(2)}
-            > 2
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationLink
-            href="#"
-            isActive = {currentPage === 3}
-            onClick={() => handlePageClick(3)}
-          > 3
-          </PaginationLink>
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
-          <PaginationNext
-          href="#"
-          onClick={() => handlePageClick(currentPage + 1)}
-          />
-        </PaginationItem>
+        {page + 1 <= pageCount && (
+          <PaginationItem>
+            <PaginationLink href={`/${page + 1}`}>{page + 1}</PaginationLink>
+          </PaginationItem>
+        )}
+        {page + 2 <= pageCount && (
+          <PaginationItem>
+            <PaginationLink href={`/${page + 2}`}>{page + 2}</PaginationLink>
+          </PaginationItem>
+        )}
+        {page + 5 < pageCount && (
+          <>
+            <PaginationItem>
+              <PaginationEllipsis />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationNext href={`/${page + 5}`} />
+            </PaginationItem>
+          </>
+        )}
       </PaginationContent>
     </Pagination>
   );

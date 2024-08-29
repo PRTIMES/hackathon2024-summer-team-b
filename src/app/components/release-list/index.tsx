@@ -2,12 +2,21 @@ import { getReleases } from "~/app/data/releases";
 
 import ReleaseItem from "./release-item";
 
-export default async function ReleaseList() {
-  const releases = await getReleases();
+export default async function ReleaseList({
+  page,
+  search,
+}: {
+  page?: number;
+  search?: string;
+}) {
+  const releases = await getReleases({
+    offset: Number(page) * 12 - 12,
+    search,
+  });
 
-  if (!releases.success || !releases.data) {
+  if (!releases.success) {
     return (
-      <main className="pt-14 sm:pt-16 pb-16 sm:pb-3">
+      <main>
         <div className="text-center">
           <p className="text-gray-600 text-lg">データの取得に失敗しました。</p>
           <p className="text-gray-600 text-lg">
@@ -18,11 +27,15 @@ export default async function ReleaseList() {
     );
   }
 
-  console.log(JSON.stringify(releases.data, null, 2));
+  if (releases.data!.length === 0) {
+    return (
+      <p className="text-center">プレスリリースが見つかりませんでした。</p>
+    );
+  }
 
   return (
-    <main className="pt-14 sm:pt-16 pb-16 sm:pb-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-4 gap-3">
-      {releases.data!.map((release) => {
+    <main className="py-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-4 gap-3">
+      {releases.data!.map((release: any) => {
         return <ReleaseItem key={release.id} {...release} />;
       })}
     </main>
