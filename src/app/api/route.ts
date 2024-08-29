@@ -1,13 +1,16 @@
 import type { Keyword, Release } from "~/libs/types/prtimes";
 
 export async function GET() {
-  const releasesRes = await fetch(`${process.env.PRTIMES_API_URL}/releases`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "aplication/json",
-      Authorization: `Bearer ${process.env.PRTIMES_API_TOKEN}`,
+  const releasesRes = await fetch(
+    `${process.env.PRTIMES_API_URL}/releases?from_date=2024-08-01`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "aplication/json",
+        Authorization: `Bearer ${process.env.PRTIMES_API_TOKEN}`,
+      },
     },
-  });
+  );
 
   const releases = (await releasesRes.json()) as Release[];
   const releasesWithKeywords = await Promise.all(
