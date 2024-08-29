@@ -17,9 +17,7 @@ export function SelectDemo() {
   const router = useRouter();
 
   const handleValueChange = (value: string) => {
-    // クエリパラメータを更新
     router.push(`?category=${value}`);
-    console.log("Selected category:", value);
   };
 
   return (

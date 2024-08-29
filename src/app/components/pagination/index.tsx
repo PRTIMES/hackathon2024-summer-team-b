@@ -9,9 +9,19 @@ import {
   PaginationPrevious,
 } from "~/components/ui/pagination";
 
-export async function ReleaseListPagination({ page }: { page: number }) {
-  const releaseCount = await getReleasesCount();
+export async function ReleaseListPagination({
+  page,
+  search,
+}: {
+  page: number;
+  search?: string;
+}) {
+  const releaseCount = await getReleasesCount({ search });
   const pageCount = Math.ceil(Number(releaseCount.data) / 12);
+
+  if (pageCount <= 1) {
+    return null;
+  }
 
   return (
     <Pagination>
