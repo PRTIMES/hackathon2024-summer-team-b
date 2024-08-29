@@ -23,7 +23,7 @@ export function SelectDemo() {
   };
 
   return (
-    <div className="mt-24 flex justify-end items-center px-4">
+    <div className="flex justify-end items-center px-4">
       <p className="text-black">カテゴリー&nbsp;:&nbsp;</p>
       <Select onValueChange={handleValueChange}>
         <SelectTrigger className="w-[180px] ml-4">
