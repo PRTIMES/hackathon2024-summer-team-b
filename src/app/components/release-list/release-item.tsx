@@ -1,9 +1,7 @@
-import lineClamp from "@tailwindcss/line-clamp";
 import Image from "next/image";
 
 import { Badge } from "~/components/ui/badge";
 import { Card, CardContent, CardFooter } from "~/components/ui/card";
-import type { Keyword, Release } from "~/libs/types/prtimes";
 
 type Props = {
   id: string;
@@ -50,12 +48,13 @@ export default function ReleaseItem({
             <div className="sm:hidden py-1.5 px-1 space-y-1 flex-1">
               <h3 className="text-lg font-bold line-clamp-3">{title}</h3>
               <div className="flex gap-1 flex-wrap">
-                {keywords.slice(0, 5).map((keywordObj, index) => 
-                  keywordObj.keyword && (
-                    <Badge key={index} className="bg-[#C24F4F]">
-                      {keywordObj.keyword.name}
-                    </Badge>
-                  )
+                {keywords.slice(0, 5).map(
+                  (keywordObj, index) =>
+                    keywordObj.keyword && (
+                      <Badge key={index} className="bg-[#C24F4F]">
+                        {keywordObj.keyword.name}
+                      </Badge>
+                    ),
                 )}
               </div>
             </div>
@@ -67,12 +66,13 @@ export default function ReleaseItem({
             {category_name}
           </p>
           <div className="flex gap-1 flex-wrap">
-            {keywords.slice(0, 5).map((keywordObj, index) => 
-              keywordObj.keyword && (
-                <Badge key={index} className="bg-[#C24F4F]">
-                  {keywordObj.keyword.name}
-                </Badge>
-              )
+            {keywords.slice(0, 5).map(
+              (keywordObj, index) =>
+                keywordObj.keyword && (
+                  <Badge key={index} className="bg-[#C24F4F]">
+                    {keywordObj.keyword.name}
+                  </Badge>
+                ),
             )}
           </div>
           <p className="text-sm mt-0.5 text-muted-foreground text-right w-full">
