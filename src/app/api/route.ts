@@ -107,10 +107,20 @@ export async function GET(req: Request) {
     );
     return Response.json({ data: releasesWithKeywords });
   } catch (error) {
-    console.error("Error in GET function:", error);
-    return Response.json(
-      { error: "Internal Server Error", details: error.message },
-      { status: 500 },
-    );
+    if (error instanceof Error) {
+      console.error("Error in GET function:", error);
+      return Response.json(
+        { error: "Internal Server Error", details: error.message },
+        { status: 500 },
+      );
+    } else {
+      return Response.json(
+        {
+          error: "Internal Server Error",
+          details: "An unknown error occurred",
+        },
+        { status: 500 },
+      );
+    }
   }
 }
