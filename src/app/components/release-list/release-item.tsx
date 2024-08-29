@@ -48,14 +48,14 @@ export default function ReleaseItem({
                 alt="release"
                 layout="fill"
                 objectFit="contain"
-                className="w-full y-full"
+                className="w-full y-full group-hover:opacity-80"
               />
             </div>
             <h2 className="sm:absolute sm:font-bold tracking-wider py-1 px-3 rounded-br-xl left-0 text-white bg-gradient-to-r from-black/80 to-black/40 text-sm sm:text-xl sm:rounded-br-none sm:rounded-tr-xl top-0 sm:top-auto sm:bottom-0 absolute z-30">
               {company_name}
             </h2>
             <div className="sm:hidden px-1 space-y-1 flex-1 py-8 pb-5 pl-5">
-              <h3 className="text-lg font-bold line-clamp-3">{title}</h3>
+              <h3 className="text-lg font-bold line-clamp-2 group-hover:underline">{title}</h3>
               <div className="flex gap-1 flex-wrap">
                 {keywords.slice(0, 5).map(
                   (keywordObj, index) =>
