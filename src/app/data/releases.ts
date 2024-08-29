@@ -38,12 +38,20 @@ export const getReleases = async ({
   return { success: true, data };
 };
 
-export const getReleasesCount = async () => {
+export const getReleasesCount = async ({ search = "" }) => {
   const supabase = createClient();
 
-  const { data, error, count } = await supabase
+  let query = supabase
     .from("releases")
     .select("*", { count: "exact", head: true });
+
+  if (search && search.trim() !== "") {
+    query = query.or(
+      `or(company_name.ilike.%${search}%,category_name.ilike.%${search}%,title.ilike.%${search}%)`,
+    );
+  }
+
+  const { data, error, count } = await query;
 
   if (error) {
     console.error("Error fetching releases:", error);

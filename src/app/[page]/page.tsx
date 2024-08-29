@@ -16,11 +16,17 @@ export default function Home({
     <article>
       <Header />
       <div className="pt-14 sm:pt-20 pb-16 sm:pb-3">
-        <ReleaseListPagination page={Number(params.page)} />
+        <ReleaseListPagination
+          page={Number(params.page)}
+          search={searchParams.search}
+        />
         <SelectDemo />
         <ReleaseList page={Number(params.page)} search={searchParams.search} />
         <SearchDrawer />
-        <ReleaseListPagination page={Number(params.page)} />
+        <ReleaseListPagination
+          page={Number(params.page)}
+          search={searchParams.search}
+        />
       </div>
     </article>
   );

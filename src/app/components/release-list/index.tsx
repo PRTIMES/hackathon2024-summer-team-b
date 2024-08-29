@@ -11,16 +11,12 @@ export default async function ReleaseList({
   category?: string;
   search?: string;
 }) {
-  console.log("page", page);
-  console.log("category", category);
-  console.log("search", search);
-
   const releases = await getReleases({
     offset: Number(page) * 12 - 12,
     search,
   });
 
-  if (!releases.success || !releases.data) {
+  if (!releases.success) {
     return (
       <main>
         <div className="text-center">
@@ -30,6 +26,12 @@ export default async function ReleaseList({
           </p>
         </div>
       </main>
+    );
+  }
+
+  if (releases.data!.length === 0) {
+    return (
+      <p className="text-center">プレスリリースが見つかりませんでした。</p>
     );
   }
 
