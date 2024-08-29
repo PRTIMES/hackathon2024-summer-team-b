@@ -73,7 +73,7 @@ export default function ReleaseItem({
           </div>
         </CardContent>
         <CardFooter className="px-3 pb-3 pt-1.5 hidden sm:flex flex-col items-start gap-1.5">
-          <h3 className="text-xl font-bold mt-0.5 line-clamp-3 group-hover:underline">
+          <h3 className="text-xl font-bold mt-0.5 line-clamp-2 group-hover:underline">
             {title}
           </h3>
           <p className="bg-black px-5 py-1 text-white text-sm rounded-sm">
@@ -92,9 +92,6 @@ export default function ReleaseItem({
                 )
             )}
           </div>
-          <p className="text-sm mt-0.5 text-muted-foreground text-right w-full transition-colors duration-300 group-hover:text-gray-700">
-            {created_at}
-          </p>
         </CardFooter>
       </a>
     </Card>
