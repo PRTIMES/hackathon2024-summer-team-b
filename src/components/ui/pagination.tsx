@@ -81,58 +81,6 @@ const PaginationNext = React.forwardRef<
 ));
 PaginationNext.displayName = "PaginationNext";
 
-export function PaginationLink({
-  href,
-  children,
-  isActive,
-}: {
-  href: string;
-  children: React.ReactNode;
-  isActive?: boolean;
-}) {
-  return (
-    <a
-      href={href}
-      className={cn(
-        "px-3 py-2 rounded-md text-white",
-        isActive ? "bg-blue-500" : "bg-[#C24F4F] hover:bg-destructive/80",
-      )}
-    >
-      {children}
-    </a>
-  );
-}
-
-export function PaginationPrevious({ href }: { href: string }) {
-  return (
-    <a
-      href={href}
-      className={cn(
-        "px-3 py-2 rounded-md text-white bg-[#C24F4F] hover:bg-destructive/80",
-      )}
-    >
-      &lt;
-    </a>
-  );
-}
-
-export function PaginationNext({ href }: { href: string }) {
-  return (
-    <a
-      href={href}
-      className={cn(
-        "px-3 py-2 rounded-md text-white bg-[#C24F4F] hover:bg-destructive/80",
-      )}
-    >
-      &gt;
-    </a>
-  );
-}
-
-export function PaginationEllipsis() {
-  return <span className="px-3 py-2">...</span>;
-}
-
 const PaginationEllipsis = React.forwardRef<
   HTMLSpanElement,
   React.HTMLAttributes<HTMLSpanElement>
