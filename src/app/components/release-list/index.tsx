@@ -2,12 +2,21 @@ import { getReleases } from "~/app/data/releases";
 
 import ReleaseItem from "./release-item";
 
-export default async function ReleaseList() {
-  const releases = await getReleases();
+export default async function ReleaseList({
+  page,
+  category,
+}: {
+  page?: number;
+  category?: string;
+}) {
+  console.log("page", page);
+  console.log("category", category);
+
+  const releases = await getReleases({ offset: Number(page) * 12 - 12 });
 
   if (!releases.success || !releases.data) {
     return (
-      <main className="pt-14 sm:pt-16 pb-16 sm:pb-3">
+      <main>
         <div className="text-center">
           <p className="text-gray-600 text-lg">データの取得に失敗しました。</p>
           <p className="text-gray-600 text-lg">
@@ -18,10 +27,8 @@ export default async function ReleaseList() {
     );
   }
 
-  console.log(JSON.stringify(releases.data, null, 2));
-
   return (
-    <main className="pt-14 sm:pt-16 pb-16 sm:pb-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-4 gap-3">
+    <main className="py-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-4 gap-3">
       {releases.data!.map((release) => {
         return <ReleaseItem key={release.id} {...release} />;
       })}
