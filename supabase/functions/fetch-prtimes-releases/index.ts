@@ -26,7 +26,8 @@ Deno.serve(async () => {
     // releases テーブルにデータを挿入
     const { data: releaseData, error: releaseError } = await supabase
       .from('releases')
-      .insert({
+      .upsert({
+        id: item.id,
         company_name: item.company_name,
         title: item.title,
         url: item.url,
