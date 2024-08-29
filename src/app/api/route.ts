@@ -1,8 +1,16 @@
 import type { Keyword, Release } from "~/libs/types/prtimes";
 
+function getYesterdayDate(): string {
+  const date = new Date();
+  date.setDate(date.getDate() - 1);
+  return date.toISOString().split("T")[0];
+}
+
 export async function GET() {
+  const yesterdayDate = getYesterdayDate();
+
   const releasesRes = await fetch(
-    `${process.env.PRTIMES_API_URL}/releases?from_date=2024-08-01`,
+    `${process.env.PRTIMES_API_URL}/releases?from_date=${yesterdayDate}`,
     {
       method: "GET",
       headers: {
@@ -15,7 +23,6 @@ export async function GET() {
   const releases = (await releasesRes.json()) as Release[];
   const releasesWithKeywords = await Promise.all(
     releases.map(async (release) => {
-      // 各データに基づいて新しいリクエストを送信
       const keywordsRes = await fetch(
         `${process.env.PRTIMES_API_URL}/companies/${release.company_id}/releases/${release.release_id}/keywords`,
         {
