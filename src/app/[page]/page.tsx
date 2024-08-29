@@ -3,7 +3,6 @@ import SearchDrawer from "~/components/search/search-drawer";
 import Header from "../components/header";
 import { ReleaseListPagination } from "../components/pagination";
 import ReleaseList from "../components/release-list";
-import { SelectDemo } from "../components/select-list/select-list";
 
 export default function Home({
   params,
@@ -20,7 +19,6 @@ export default function Home({
           page={Number(params.page)}
           search={searchParams.search}
         />
-        <SelectDemo />
         <ReleaseList page={Number(params.page)} search={searchParams.search} />
         <SearchDrawer />
         <ReleaseListPagination

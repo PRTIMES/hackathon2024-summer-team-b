@@ -4,11 +4,9 @@ import ReleaseItem from "./release-item";
 
 export default async function ReleaseList({
   page,
-  category,
   search,
 }: {
   page?: number;
-  category?: string;
   search?: string;
 }) {
   const releases = await getReleases({
