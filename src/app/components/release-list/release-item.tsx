@@ -25,6 +25,7 @@ export default function ReleaseItem({
   category_name,
   image_url,
   url,
+  keywords,
   created_at,
 }: Props) {
   return (
@@ -48,9 +49,13 @@ export default function ReleaseItem({
             <div className="sm:hidden py-1.5 px-1 space-y-1 flex-1">
               <h3 className="text-lg font-bold">{title}</h3>
               <div className="flex gap-1 flex-wrap">
-                <Badge className="bg-[#C24F4F]">キーワード</Badge>
-                <Badge className="bg-[#C24F4F]">キーワード</Badge>
-                <Badge className="bg-[#C24F4F]">キーワード</Badge>
+                {keywords.slice(0, 5).map((keywordObj, index) => 
+                  keywordObj.keyword && (
+                    <Badge key={index} className="bg-[#C24F4F]">
+                      {keywordObj.keyword.name}
+                    </Badge>
+                  )
+                )}
               </div>
             </div>
           </div>
@@ -60,10 +65,14 @@ export default function ReleaseItem({
           <p className="bg-black px-5 py-1 text-white text-sm rounded-sm">
             {category_name}
           </p>
-          <div className="flex gap-1">
-            <Badge className="bg-[#C24F4F]">キーワード</Badge>
-            <Badge className="bg-[#C24F4F]">キーワード</Badge>
-            <Badge className="bg-[#C24F4F]">キーワード</Badge>
+          <div className="flex gap-1 flex-wrap">
+            {keywords.slice(0, 5).map((keywordObj, index) => 
+              keywordObj.keyword && (
+                <Badge key={index} className="bg-[#C24F4F]">
+                  {keywordObj.keyword.name}
+                </Badge>
+              )
+            )}
           </div>
           <p className="text-sm mt-0.5 text-muted-foreground text-right w-full">
             {created_at}
