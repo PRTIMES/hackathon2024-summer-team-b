@@ -31,7 +31,7 @@ export default function SearchDrawer() {
         </div>
         <DrawerFooter>
           <DrawerClose>
-            <Button variant="outline" className="w-full">
+            <Button variant="outline" className="w-full hover:bg-muted/50">
               やめる
             </Button>
           </DrawerClose>

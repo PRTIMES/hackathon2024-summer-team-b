@@ -12,7 +12,7 @@ export default function SearchForm() {
 
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    router.push(`?search=${searchQuery}`);
+    router.push(`/1?search=${searchQuery}`);
   };
 
   return (
