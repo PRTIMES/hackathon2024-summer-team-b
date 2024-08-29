@@ -44,8 +44,14 @@ Deno.serve(async () => {
 
     console.log('Inserted release:', releaseData);
 
+    if (!item.keywords) {
+      console.log('No keywords found for release:', item.title);
+      continue;
+    }
+
     // keywords テーブルにデータを挿入
     for (const keyword of item.keywords) {
+
       const { data: keywordData,  error: keywordError } = await supabase
         .from('keywords')
         .upsert({
