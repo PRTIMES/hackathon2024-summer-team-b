@@ -1,7 +1,7 @@
 import type { Keyword, Release } from "~/libs/types/prtimes";
 
-export async function GET(request: Request) {
-  const res = await fetch("https://hackathon.stg-prtimes.net/api/releases", {
+export async function GET() {
+  const releasesRes = await fetch(`${process.env.PRTIMES_API_URL}/releases`, {
     method: "GET",
     headers: {
       "Content-Type": "aplication/json",
@@ -9,12 +9,12 @@ export async function GET(request: Request) {
     },
   });
 
-  const data = (await res.json()) as Release[];
-  const articleData = await Promise.all(
-    data.map(async (e) => {
+  const releases = (await releasesRes.json()) as Release[];
+  const releasesWithKeywords = await Promise.all(
+    releases.map(async (release) => {
       // 各データに基づいて新しいリクエストを送信
-      const categoryRes = await fetch(
-        `https://hackathon.stg-prtimes.net/api/companies/${e.company_id}/releases/${e.release_id}/keywords`,
+      const keywordsRes = await fetch(
+        `${process.env.PRTIMES_API_URL}/companies/${release.company_id}/releases/${release.release_id}/keywords`,
         {
           method: "GET",
           headers: {
@@ -24,11 +24,11 @@ export async function GET(request: Request) {
         },
       );
 
-      const data = (await categoryRes.json()) as Keyword[];
-      const margeData = Object.assign(e, { category: data });
-      return margeData; // 各レスポンスをJSONに変換して返す
+      const keywords = (await keywordsRes.json()) as Keyword[];
+      const releasesWithKeywords = Object.assign(release, { keywords });
+      return releasesWithKeywords;
     }),
   );
 
-  return Response.json({ articleData });
+  return Response.json({ data: releasesWithKeywords });
 }
