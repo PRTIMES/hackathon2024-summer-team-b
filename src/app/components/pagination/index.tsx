@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 
 import {
   Pagination,
@@ -11,28 +13,52 @@ import {
 } from "~/components/ui/pagination";
 
 export function PaginationDemo() {
+  const [currentPage, setCurrntPage] = useState(1)
+  const handlePageClick = (page: number) => {
+    setCurrntPage(page);
+  };
+
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious href="#" />
+          <PaginationPrevious
+            href="#"
+            onClick={() => handlePageClick(currentPage > 1 ? currentPage - 1 : 1)}
+            />
         </PaginationItem>
-        <PaginationItem>
-          <PaginationLink href="#" isActive>
-            1
+            <PaginationItem>
+          <PaginationLink
+                href="#"
+                isActive = {currentPage === 1}
+                onClick={() => handlePageClick(1)}
+            > 1
           </PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href="#">2</PaginationLink>
+          <PaginationLink
+                href="#"
+                isActive = {currentPage === 2}
+                onClick={() => handlePageClick(2)}
+            > 2
+          </PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href="#">3</PaginationLink>
+          <PaginationLink
+            href="#"
+            isActive = {currentPage === 3}
+            onClick={() => handlePageClick(3)}
+          > 3
+          </PaginationLink>
         </PaginationItem>
         <PaginationItem>
           <PaginationEllipsis />
         </PaginationItem>
         <PaginationItem>
-          <PaginationNext href="#" />
+          <PaginationNext
+          href="#"
+          onClick={() => handlePageClick(currentPage + 1)}
+          />
         </PaginationItem>
       </PaginationContent>
     </Pagination>
