@@ -15,7 +15,7 @@ export async function GET(req: Request) {
     const yesterdayDate = getYesterdayDate();
 
     const releasesRes = await fetch(
-      `${process.env.PRTIMES_API_URL}/releases?from_date=2024-06-01?to_date=2024-06-30`,
+      `${process.env.PRTIMES_API_URL}/releases?from_date=${yesterdayDate}`,
       {
         method: "GET",
         headers: {
