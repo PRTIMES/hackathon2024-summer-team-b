@@ -1,4 +1,5 @@
 import React from "react";
+
 import { cn } from "~/libs/classes";
 
 export function Pagination({ children }: { children: React.ReactNode }) {
@@ -31,7 +32,7 @@ export function PaginationLink({
       href={href}
       className={cn(
         "px-3 py-2 rounded-md text-white",
-        isActive ? "bg-blue-500" : "bg-[#C24F4F] hover:bg-destructive/80"
+        isActive ? "bg-blue-500" : "bg-[#C24F4F] hover:bg-destructive/80",
       )}
     >
       {children}
@@ -43,7 +44,9 @@ export function PaginationPrevious({ href }: { href: string }) {
   return (
     <a
       href={href}
-      className={cn("px-3 py-2 rounded-md text-white bg-[#C24F4F] hover:bg-destructive/80")}
+      className={cn(
+        "px-3 py-2 rounded-md text-white bg-[#C24F4F] hover:bg-destructive/80",
+      )}
     >
       &lt;
     </a>
@@ -54,7 +57,9 @@ export function PaginationNext({ href }: { href: string }) {
   return (
     <a
       href={href}
-      className={cn("px-3 py-2 rounded-md text-white bg-[#C24F4F] hover:bg-destructive/80")}
+      className={cn(
+        "px-3 py-2 rounded-md text-white bg-[#C24F4F] hover:bg-destructive/80",
+      )}
     >
       &gt;
     </a>
