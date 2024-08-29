@@ -58,13 +58,12 @@ export default function ReleaseItem({
             <div className="sm:hidden px-1 space-y-1 flex-1 py-8 pb-5 pl-5">
               <h3 className="text-lg font-bold line-clamp-3">{title}</h3>
               <div className="flex gap-1 flex-wrap">
-                {keywords.slice(0, 5).map(
-                  (keywordObj, index) =>
-                    keywordObj.keyword && (
-                      <Badge key={index} className="bg-[#C24F4F]">
-                        {keywordObj.keyword.name}
-                      </Badge>
-                    ),
+                {keywords.slice(0, 5).map((keywordObj, index) => 
+                  keywordObj.keyword && (
+                    <Badge key={index} className="bg-[#C24F4F] pointer-events-none">
+                      {keywordObj.keyword.name}
+                    </Badge>
+                  )
                 )}
               </div>
             </div>
@@ -76,13 +75,12 @@ export default function ReleaseItem({
             {category_name}
           </p>
           <div className="flex gap-1 flex-wrap">
-            {keywords.slice(0, 5).map(
-              (keywordObj, index) =>
-                keywordObj.keyword && (
-                  <Badge key={index} className="bg-[#C24F4F]">
-                    {keywordObj.keyword.name}
-                  </Badge>
-                ),
+            {keywords.slice(0, 5).map((keywordObj, index) => 
+              keywordObj.keyword && (
+                <Badge key={index} className="bg-[#C24F4F] pointer-events-none">
+                  {keywordObj.keyword.name}
+                </Badge>
+              )
             )}
           </div>
           <p className="text-sm mt-0.5 text-muted-foreground text-right w-full">
