@@ -52,7 +52,7 @@ export default function ReleaseItem({
               <div className="flex gap-1 flex-wrap">
                 {keywords.slice(0, 5).map((keywordObj, index) => 
                   keywordObj.keyword && (
-                    <Badge key={index} className="bg-[#C24F4F]">
+                    <Badge key={index} className="bg-[#C24F4F] pointer-events-none">
                       {keywordObj.keyword.name}
                     </Badge>
                   )
@@ -69,7 +69,7 @@ export default function ReleaseItem({
           <div className="flex gap-1 flex-wrap">
             {keywords.slice(0, 5).map((keywordObj, index) => 
               keywordObj.keyword && (
-                <Badge key={index} className="bg-[#C24F4F]">
+                <Badge key={index} className="bg-[#C24F4F] pointer-events-none">
                   {keywordObj.keyword.name}
                 </Badge>
               )
