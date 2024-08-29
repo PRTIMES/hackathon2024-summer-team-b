@@ -2,21 +2,33 @@
 
 import { createClient } from "~/libs/supabase/server";
 
-export const getReleases = async ({ offset = 0, limit = 12 } = {}) => {
+export const getReleases = async ({
+  offset = 0,
+  limit = 12,
+  search = "",
+} = {}) => {
   const supabase = createClient();
 
-  const { data, error } = await supabase
+  let query = supabase
     .from("releases")
     .select(
       `
-          *,
-          keywords:keyword_map(
-            keyword:keywords(name)
-          )
-        `,
+      *,
+      keywords:keyword_map(
+        keyword:keywords(name)
+      )
+    `,
     )
     .order("created_at", { ascending: false })
     .range(offset, offset + limit - 1);
+
+  if (search && search.trim() !== "") {
+    query = query.or(
+      `or(company_name.ilike.%${search}%,category_name.ilike.%${search}%,title.ilike.%${search}%)`,
+    );
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     console.error("Error fetching releases:", error);
