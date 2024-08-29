@@ -28,8 +28,8 @@ export default function ReleaseItem({
   created_at,
 }: Props) {
   return (
-    <Card className="overflow-hidden relative transition-colors duration-300 hover:bg-gray-100">
-      <a href={url} target="_blank" rel="noopener noreferrer" className="block">
+    <Card className="overflow-hidden relative hover:bg-muted group transition duration-200">
+      <a href={url} target="_blank" rel="noopener noreferrer">
         <CardContent className="p-0">
           {" "}
           <div className="relative flex sm:block">
@@ -39,7 +39,7 @@ export default function ReleaseItem({
                 alt="release"
                 layout="fill"
                 objectFit="contain"
-                className="absolute top-0 left-0 w-full h-full"
+                className="absolute top-0 left-0 w-full h-full group-hover:opacity-80 transition duration-200"
               />
             </div>
             <div className="sm:hidden relative w-36 h-auto bg-white py-10">
@@ -62,21 +62,21 @@ export default function ReleaseItem({
                     keywordObj.keyword && (
                       <Badge
                         key={index}
-                        className="bg-[#C24F4F] pointer-events-none no-underline hover:underline-none"
+                        className="bg-[#C24F4F] pointer-events-none"
                       >
                         {keywordObj.keyword.name}
                       </Badge>
-                    ),
+                    )
                 )}
               </div>
             </div>
           </div>
         </CardContent>
         <CardFooter className="px-3 pb-3 pt-1.5 hidden sm:flex flex-col items-start gap-1.5">
-          <h3 className="text-xl font-bold mt-0.5 line-clamp-3 transition-colors duration-300 group-hover:text-blue-600">
+          <h3 className="text-xl font-bold mt-0.5 line-clamp-3 group-hover:underline">
             {title}
           </h3>
-          <p className="bg-black px-5 py-1 text-white text-sm rounded-sm transition-colors duration-300 group-hover:bg-blue-800">
+          <p className="bg-black px-5 py-1 text-white text-sm rounded-sm">
             {category_name}
           </p>
           <div className="flex gap-1 flex-wrap">
@@ -85,11 +85,11 @@ export default function ReleaseItem({
                 keywordObj.keyword && (
                   <Badge
                     key={index}
-                    className="bg-[#C24F4F] pointer-events-none transition-colors duration-300 group-hover:bg-red-700"
+                    className="bg-[#C24F4F] pointer-events-none"
                   >
                     {keywordObj.keyword.name}
                   </Badge>
-                ),
+                )
             )}
           </div>
           <p className="text-sm mt-0.5 text-muted-foreground text-right w-full transition-colors duration-300 group-hover:text-gray-700">
